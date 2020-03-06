@@ -2,23 +2,28 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Content extends CI_Controller {
-    public function __construct(){
-parent::__construct();
-$this->load->library('form_validation');
-date_default_timezone_set("Asia/Jakarta");
-$this->load->model('Content_model');
+	function __construct(){
+        parent::__construct();
+        if(!$this->session->userdata('name')){
+			redirect('auth');
+		}
+		$this->load->helper('url');
+		$this->load->model('Content_model', 'content');
+        date_default_timezone_set("Asia/Jakarta");
+        $this->load->library('form_validation');
     }
     public function index(){
-        $this->form_validation->set_rules('name', 'Name', 'trim|required');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required');
-$data['user'] = $this->db->get_where('user', ['name' => 
-$this->session->userdata('name')])->row_array();
-echo 'Selamat datang ' .$data['user']['name'];
-        // $data['title'] = 'Login Page';
-        // $this->load->view('templates/auth_header', $data);
-    // $this->load->view('auth/login');
-        // $this->load->view('templates/auth_footer');
-   
+       	$data['user'] = $this->db->get_where('user', ['name' => $this->session->userdata('name')])->row_array();
+        $data['title'] = 'Content Management';
+        
+        $data['menu'] = $this->db->get('user_menu')->result_array();
+
+    
+            $this->load->view('templates/sidebar.php', $data);
+            $this->load->view('templates/topbar.php', $data);
+            $this->load->view('content/index', $data); //MENAMPILKAN KE HALAMAN profiel LIST BESERTA DATA YANG TELAH DITANGKAP
+            $this->load->view('templates/footer.php');
+ 
 }
 
 }
