@@ -16,8 +16,9 @@ class Content extends CI_Controller {
        	$data['user'] = $this->db->get_where('user', ['name' => $this->session->userdata('name')])->row_array();
         $data['title'] = 'Content Management';
         
-        $data['menu'] = $this->db->get('user_menu')->result_array();
-
+        // $data['content'] = $this->db->get('content')->result_array();
+        $data['JenisContent'] = $this->content->getJenisContent();
+		$data['content'] = $this->content->show_all()->result();
     
             $this->load->view('templates/sidebar.php', $data);
             $this->load->view('templates/topbar.php', $data);
