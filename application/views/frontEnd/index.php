@@ -8,7 +8,7 @@
          data-aos-anchor-placement="center-bottom">~ Gress <span class="yellow">FM</span></h3>
         </div>
         <div class="col-6">
-          <img src="./assets/images/microphone.png" alt="" class="img-fluid mr-5 ">
+          <img src="<?= base_url('bahan/fo'); ?>/assets/images/microphone.png" alt="" class="img-fluid mr-5 ">
         </div>
       </div>
     </div>
@@ -198,4 +198,36 @@
   <section class="pb-3 pt-3" style="background-color: #fee715ff;">
 
   </section>
-  
+  <script>
+    AOS.init();
+  </script>
+  <script type="text/javascript">
+    $(document).on('ready', function () {
+
+      $(".regular").slick({
+        dots: true,
+        infinite: true,
+        centerMode: true,
+        slidesToShow: 2,
+        slidesToScroll: 1
+      });
+      $(".center").slick({
+        dots: true,
+        lazyLoad: 'ondemand',
+        infinite: true,
+        centerMode: true,
+        slidesToShow: 3,
+        slidesToScroll: 1
+      });
+      $(".variable").slick({
+        dots: true,
+        centerMode: true,
+        infinite: true,
+        variableWidth: true
+      });
+      $(".lazy").slick({
+        lazyLoad: 'ondemand', // ondemand progressive anticipated
+        infinite: true
+      });
+    });
+  </script>
